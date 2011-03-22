@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+// requires
+var http = require('http');
+
+
+
+
 /**
  * creates an advice-dog type of meme
  *
@@ -51,3 +57,9 @@ if(!(symbol in meme_generator.memes)) {
 	console.log('use --list to see what is available');
 	process.exit(1);
 } 
+
+text.push(function callback(link) {
+	console.log(link);
+})
+
+meme_generator.memes[symbol].apply(null, text);
