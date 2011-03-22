@@ -2,7 +2,7 @@
   "name": "meme",
   "description": "a CLI utility to generate memes using memegenerator.net",
   "keywords": ["meme", "cli"],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://github.com/floby/node-meme",
   "repository": {
     "type": "git",
