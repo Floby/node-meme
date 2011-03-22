@@ -83,7 +83,7 @@ var meme_generator = {
 	// I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
 	// meme SPARTA 'this is' 'Data!'
-	memes: require('../lib/config').parseMemes(simple);
+	memes: require('../lib/config').parseMemes(simple)
 }
 
 // beginning program
@@ -105,6 +105,14 @@ if(process.argv[2] === '--list') {
 			m.first_line ? ' -> '+m.first_line: ''
 		)
 	}
+	process.exit();
+}
+
+// if one wants to see what a given meme is
+if(process.argv[2] === 'view') {
+	var sym = process.argv[3];
+	var name = meme_generator.memes[sym].template_name;
+	console.log('http://memegenerator.net/%s', name);
 	process.exit();
 }
 
