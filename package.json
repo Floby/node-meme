@@ -1,0 +1,22 @@
+{
+  "name": "meme",
+  "description": "a CLI utility to generate memes using memegenerator.net",
+  "keywords": ["meme", "cli"],
+  "version": "0.1.0",
+  "homepage": "http://github.com/floby/node-meme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Floby/node-meme.git"
+  },
+  "author": "Florent Jaby <florent.jaby@gmail.com>",
+  "main": "lib/warning.js",
+  "bin": {
+	"meme": "bin/app.js"
+  },
+  "directories": {
+    "lib": "lib/"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  }
+}
