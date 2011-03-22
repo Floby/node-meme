@@ -40,20 +40,24 @@ function fetch (data, callback) {
 	req.end(post+'\n');
 }
 
+var types = {
+	adv: 'AdviceDogSpinoff',
+	vert: 'Vertical'
+}
 
 /**
  * creates an advice-dog type of meme
  *
  * two lines of text only
  */
-function simple (id, template_name, first_line) {
+function maker (type, id, template_name, first_line) {
 	// return a closured function that fetches the link
 	// page and looks for the link
 	var res = function(line1, line2) {
 		var cb = [].pop.call(arguments); // arguments is no real array
 		// construct the data to post
 		var data = {
-			templateType: 'AdviceDogSpinoff',
+			templateType: types[type] || 'AdviceDogSpinoff',
 			templateID: id,
 			generatorName: template_name
 		};
@@ -83,7 +87,7 @@ var meme_generator = {
 	// I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
 	// meme SPARTA 'this is' 'Data!'
-	memes: require('../lib/config').parseMemes(simple)
+	memes: require('../lib/config').parseMemes(maker)
 }
 
 // beginning program
