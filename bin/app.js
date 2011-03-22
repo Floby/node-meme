@@ -31,7 +31,7 @@ var meme_generator = {
 
 if(process.argv.length < 3) {
 	console.log("meme [GENERATOR|--list] LINE [ADDITIONAL_LINES]");
-	process.exit(0);
+	process.exit();
 }
 
 if(process.argv[2] === '--list') {
@@ -39,11 +39,15 @@ if(process.argv[2] === '--list') {
 	for(var key in meme_generator.memes) {
 		console.log("%s: %s", key, meme_generator.memes[key].template_name)
 	}
-	return
+	process.exit();
 }
 
 // that was the easy part
 
 var symbol = process.argv[2];
 var text = process.argv.slice(3);
-
+if(!(symbol in meme_generator.memes)) {
+	console.log('unknown meme %s',symbol);
+	console.log('use --list to see what is available');
+	process.exit(1);
+} 
