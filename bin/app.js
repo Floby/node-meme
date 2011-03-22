@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// if you're looking for an entry point, begin reading at line 90
+// if you're looking for an entry point, begin reading at line 92
 
 // requires
 var http = require('http');
@@ -71,6 +71,7 @@ function simple (id, template_name, first_line) {
 	return res
 }
 
+
 /**
  * general info
  */
@@ -81,24 +82,8 @@ var meme_generator = {
 	
 	// I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
-	// here comes the ugly inline data
-	// TODO: move this to CSV
-	memes: {
-		ANTEATER: simple(41191, 'Anteater'),
-		A_DODSON: simple(106375, 'Antoine-Dodson'),
-		A_DOG: simple(940, 'Advice-Dog'),
-		A_FATHER: simple(1436, 'High-Expectations-Asian-Father'),
-		BUTTHURT_DWELLER: simple(1438, 'Butthurt-Dweller'),
-		B_FROG: simple(1211, 'Foul-Bachelorette-Frog'),
-		B_FROG2: simple(1045, 'Foul-Bachelor-Frog'),
-		COOL_STORY_HOUSE: simple(16948, 'cool-story-bro-house'),
-		CREEPER: simple(173501, 'Minecraft-Creeper'),
-		C_WOLF: simple(931, 'Courage-Wolf'),
-		F_FRY: simple(84688, 'Futurama-Fry'),
-		G_GRANDPA: simple(185650, 'Grumpy-Grandpa'),
-		H_MERMAID: simple(405224, 'Hipster-Mermaid'),
-		V_BABY: simple(11140, 'Victory-Baby')
-	}
+	// meme SPARTA 'this is' 'Data!'
+	memes: require('../lib/config').parseMemes(simple);
 }
 
 // beginning program
@@ -113,7 +98,12 @@ if(process.argv.length < 3) {
 // list available memes when asked for it
 if(process.argv[2] === '--list') {
 	for(var key in meme_generator.memes) {
-		console.log("%s: %s", key, meme_generator.memes[key].template_name)
+		m = meme_generator.memes[key];
+		console.log("%s: %s%s",
+			key,
+			m.template_name,
+			m.first_line ? ' -> '+m.first_line: ''
+		)
 	}
 	process.exit();
 }
