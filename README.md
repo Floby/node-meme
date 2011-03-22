@@ -41,7 +41,6 @@ You can also drive it like an API:
 ## Winners' way
 	$ npm install meme
 
-not effective yet, I will publish it when it's ready
 
 ## Losers' way
 	$ git clone https://github.com/floby/node-meme
