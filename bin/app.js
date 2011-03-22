@@ -29,6 +29,11 @@ var meme_generator = {
 // beginning program
 // parse args and then do things
 
+if(process.argv.length < 3) {
+	console.log("meme [GENERATOR|--list] LINE [ADDITIONAL_LINES]");
+	process.exit(0);
+}
+
 if(process.argv[2] === '--list') {
 	console.log('coucou')
 	for(var key in meme_generator.memes) {
@@ -38,3 +43,7 @@ if(process.argv[2] === '--list') {
 }
 
 // that was the easy part
+
+var symbol = process.argv[2];
+var text = process.argv.slice(3);
+
