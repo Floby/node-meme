@@ -86,7 +86,6 @@ if(process.argv.length < 3) {
 }
 
 if(process.argv[2] === '--list') {
-	console.log('coucou')
 	for(var key in meme_generator.memes) {
 		console.log("%s: %s", key, meme_generator.memes[key].template_name)
 	}
