@@ -82,8 +82,21 @@ var meme_generator = {
 	// I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
 	// here comes the ugly inline data
+	// TODO: move this to CSV
 	memes: {
 		ANTEATER: simple(41191, 'Anteater'),
+		A_DODSON: simple(106375, 'Antoine-Dodson'),
+		A_DOG: simple(940, 'Advice-Dog'),
+		A_FATHER: simple(1436, 'High-Expectations-Asian-Father'),
+		BUTTHURT_DWELLER: simple(1438, 'Butthurt-Dweller'),
+		B_FROG: simple(1211, 'Foul-Bachelorette-Frog'),
+		B_FROG2: simple(1045, 'Foul-Bachelor-Frog'),
+		COOL_STORY_HOUSE: simple(16948, 'cool-story-bro-house'),
+		CREEPER: simple(173501, 'Minecraft-Creeper'),
+		C_WOLF: simple(931, 'Courage-Wolf'),
+		F_FRY: simple(84688, 'Futurama-Fry'),
+		G_GRANDPA: simple(185650, 'Grumpy-Grandpa'),
+		H_MERMAID: simple(405224, 'Hipster-Mermaid'),
 		V_BABY: simple(11140, 'Victory-Baby')
 	}
 }
