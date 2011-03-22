@@ -24,11 +24,9 @@ function fetch (data, callback) {
 	req.on('response', function(res) {
 		console.log('in response event')
 		if(res.statusCode !== 302) {
-			res.end();
 			return callback(new Error("Got error "+res.statusCode));
 		}
 		if(!res.headers.location) {
-			res.end();
 			return callback(new Error("No location header"));
 		}
 		console.log('dump response headers ', res.headers);
