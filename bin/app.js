@@ -63,7 +63,7 @@ function maker (type, id, template_name, first_line) {
 		};
 		// add the default first line as first argument
 		// TODO: improve this
-		if(first_line) [].unshift.call(arguments, first_line);
+		if(first_line && !line2) [].unshift.call(arguments, first_line);
 		for (var i = 0; i < arguments.length; ++i) {
 			data['text'+i] = arguments[i];
 		};
