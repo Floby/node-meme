@@ -10,16 +10,19 @@ function fetch (data, callback) {
 	var url = meme_generator.url;
 	var post = qs.stringify(data);
 	console.log('dump post: %s', post);
-	var req = http.request({
+	var options = {
 		host: url.host,
 		port: url.port || 80,
 		path: url.pathname,
 		method: 'POST',
-	});
+	};
+	console.log('dump options', options);
+	var req = http.request(options);
 	req.on('error', function(error) {
 		return callback(error);
 	});
 	req.on('response', function(res) {
+		console.log('in response event')
 		if(res.statusCode !== 302) {
 			res.end();
 			return callback(new Error("Got error "+res.statusCode));
@@ -28,11 +31,11 @@ function fetch (data, callback) {
 			res.end();
 			return callback(new Error("No location header"));
 		}
+		console.log('dump response headers ', res.headers);
 		callback(null, url.host+res.headers.location+'.jpg');
 	});
-	req.write(post);
-	req.end();
-	console.log('dumping req', req);
+	req.end(post);
+	//console.log('dumping req', req);
 }
 
 
@@ -103,8 +106,9 @@ if(!(symbol in meme_generator.memes)) {
 } 
 
 text.push(function callback(err, link) {
+	console.log('in master callback')
 	if(err) {
-		console.error(err);
+		throw(err);
 		process.exit(2);
 	}
 	console.log(link);
