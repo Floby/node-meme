@@ -11,10 +11,13 @@ function fetch (data, callback) {
 	var post = qs.stringify(data);
 	console.log('dump post: %s', post);
 	var options = {
-		host: url.host,
+		host: url.hostname,
 		port: url.port || 80,
 		path: url.pathname,
 		method: 'POST',
+	};
+	options.headers = {
+		'Content-Type': 'application/x-www-form-urlencoded'
 	};
 	console.log('dump options', options);
 	var req = http.request(options);
@@ -22,18 +25,16 @@ function fetch (data, callback) {
 		return callback(error);
 	});
 	req.on('response', function(res) {
-		console.log('in response event')
+		res.setEncoding('utf8');
 		if(res.statusCode !== 302) {
 			return callback(new Error("Got error "+res.statusCode));
 		}
 		if(!res.headers.location) {
 			return callback(new Error("No location header"));
 		}
-		console.log('dump response headers ', res.headers);
 		callback(null, url.host+res.headers.location+'.jpg');
 	});
-	req.end(post);
-	//console.log('dumping req', req);
+	req.end(post+'\n');
 }
 
 
@@ -49,9 +50,9 @@ function simple (id, template_name, first_line) {
 		var cb = [].pop.call(arguments);
 		// construct the data to post
 		var data = {
-			templateId: id,
-			generatorName: template_name,
-			templateType: 'AdviceDogSpinoff'
+			templateType: 'AdviceDogSpinoff',
+			templateID: id,
+			generatorName: template_name
 		};
 		if(first_line) [].unshift.call(arguments, first_line);
 		for (var i = 0; i < arguments.length; ++i) {
@@ -71,6 +72,7 @@ function simple (id, template_name, first_line) {
 var meme_generator = {
 	version: '0.1.0',
 	url: url.parse('http://memegenerator.net/Instance/CreateOrEdit'),
+	//url: url.parse('http://localhost:3000/Instance/CreateOrEdit'),
 	// I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 	memes: {
 		ANTEATER: simple(41191, 'Anteater'),
