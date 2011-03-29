@@ -5,6 +5,7 @@
 var http = require('http');
 var qs = require('querystring');
 var url = require('url');
+var format = require('sprintf').sprintf;
 
 function fetch (data, callback) {
     var url = meme_generator.url; // this is JSON object
@@ -103,11 +104,10 @@ if(process.argv.length < 3) {
 if(process.argv[2] === '--list') {
     for(var key in meme_generator.memes) {
         m = meme_generator.memes[key];
-        console.log("%s: %s%s",
-            key,
-            m.template_name,
-            m.first_line ? ' -> '+m.first_line: ''
-        )
+        var str = format("%-20s %-30s ", key, m.template_name);
+        if(m.first_line)
+            str += 'first line: '+m.first_line;
+        console.log(str);
     }
     process.exit();
 }
