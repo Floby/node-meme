@@ -30,7 +30,8 @@ Generate a Y U NO meme:
 See a list of available generators:
 	$ meme --list
 
-You can also drive it like an API:
+Get the url to the online interface for a given meme
+    $ meme view P_HERE_THERE
 
 # Requirements
 * [node](http://nodejs.org)
