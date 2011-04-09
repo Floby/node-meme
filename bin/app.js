@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// if you're looking for an entry point, begin reading at line 92
+// if you're looking for an entry point, begin reading at line 91
 
 // requires
 var http = require('http');
@@ -8,7 +8,7 @@ var url = require('url');
 var format = require('sprintf').sprintf;
 
 function fetch (data, callback) {
-    var url = meme_generator.url; // this is JSON object
+    var url = meme_generator.url; // this is a JSON object
     var post = qs.stringify(data); // stringify into urlencoded
     var options = {
         host: url.hostname,
@@ -21,10 +21,8 @@ function fetch (data, callback) {
         'Content-Type': 'application/x-www-form-urlencoded'
     };
     var req = http.request(options);
-    req.on('error', function(error) {
-        // send all errors to the global handler
-        return callback(error);
-    });
+    // send all errors to the global handler
+    req.on('error', callback);
     req.on('response', function(res) {
         res.setEncoding('utf8');
         if(res.statusCode !== 302) {
@@ -70,6 +68,7 @@ function maker (type, id, template_name, first_line) {
         };
         fetch(data, cb);
     }
+    // attach some data to help displaying lists
     res.id = id;
     res.template_name = template_name;
     res.first_line = first_line;
@@ -81,17 +80,15 @@ function maker (type, id, template_name, first_line) {
  * general info
  */
 var meme_generator = {
-    version: '0.1.0',
+    version: '0.1.2',
     url: url.parse('http://memegenerator.net/Instance/CreateOrEdit'),
-    //url: url.parse('http://localhost:3000/Instance/CreateOrEdit'),
-    
     // I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
     // meme SPARTA 'this is' 'Data!'
     memes: require('../lib/config').parseMemes(maker)
 }
 
-// beginning program
+// BEGIN MASTER PROGRAM
 // parse args and then do things
 
 // print usage when no arguments are provided
@@ -101,7 +98,7 @@ if(process.argv.length < 3) {
 }
 
 // list available memes when asked for it
-if(process.argv[2] === '--list') {
+if(process.argv[2] === 'list') {
     for(var key in meme_generator.memes) {
         m = meme_generator.memes[key];
         var str = format("%-20s %-30s ", key, m.template_name);
@@ -127,7 +124,7 @@ var text = process.argv.slice(3);
 if(!(symbol in meme_generator.memes)) {
     // haha! you thought I was that dumb ?
     console.error('unknown meme %s',symbol);
-    console.error('use --list to see what is available');
+    console.error('use `meme list` to see what is available');
     process.exit(1);
 }
 
