@@ -85,7 +85,8 @@ var meme_generator = {
     // I could do the trick with the user agent thing. CAN HAZ MOTIVATION?
 
     // meme SPARTA 'this is' 'Data!'
-    memes: require('../lib/config').parseMemes(maker)
+    //memes: require('../lib/config').parseMemes(maker)
+    //require this later
 }
 
 // BEGIN MASTER PROGRAM
@@ -96,6 +97,14 @@ if(process.argv.length < 3) {
     console.log("meme [GENERATOR|--list] LINE [ADDITIONAL_LINES]");
     process.exit();
 }
+// print version when asked for
+if(/^(-v|(--)?version)$/.test(process.argv[2])) {
+    console.log(meme_generator.version);
+    process.exit();
+}
+
+// moved this here for performance
+meme_generator.memes = require('../lib/config').parseMemes(maker);
 
 // list available memes when asked for it
 if(process.argv[2] === 'list') {
