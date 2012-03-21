@@ -42,6 +42,7 @@ Get the url to the online interface for a given meme
 ## Winners' way
 	$ npm install meme
 
+*/!\ DEPRECATED I am no longer the owner of the meme package on npm. This won't be what you're looking for /!\*
 
 ## Losers' way
 	$ git clone https://github.com/floby/node-meme
